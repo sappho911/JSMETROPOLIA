@@ -10,8 +10,8 @@ function randomDice() {
 function rollingDice() {
   while (true) {
     const roll = randomDice();
-    if (roll === 6) break;
     numbers.push(roll);
+    if (roll === 6) break;
   }
 }
 rollingDice();
