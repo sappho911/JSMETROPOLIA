@@ -95,6 +95,9 @@ const picArray = [
 // add your code here
 
 const pictures = document.querySelector("#pictures");
+const modal = document.querySelector("#modal");
+const modalImg = document.querySelector("#modalImg");
+const closeBtn = document.querySelector("#closeBtn");
 
 picArray.forEach((pic) => {
   const divArticle = document.createElement("article");
@@ -103,33 +106,40 @@ picArray.forEach((pic) => {
   const {
     title,
     caption,
-    image: { large, medium },
+    image: { medium, large },
     description,
   } = pic;
 
   const h2 = document.createElement("h2");
-  h2.innerHTML = `${title}`;
-
-  divArticle.appendChild(h2);
+  h2.textContent = title;
 
   const divFigure = document.createElement("figure");
+
   const img = document.createElement("img");
   img.src = medium;
+  img.alt = title;
 
-  divFigure.appendChild(img);
-
-  const divFigcaption = document.createElement("figcaption");
-  divFigcaption.textContent = caption;
-
-  divFigure.appendChild(divFigcaption);
-
-  divArticle.appendChild(divFigure);
+  const figcaption = document.createElement("figcaption");
+  figcaption.textContent = caption;
 
   const p = document.createElement("p");
-
   p.textContent = description;
 
+  divFigure.appendChild(img);
+  divFigure.appendChild(figcaption);
   divFigure.appendChild(p);
+  divArticle.appendChild(h2);
+  divArticle.appendChild(divFigure);
+
+  divArticle.addEventListener("click", () => {
+    modalImg.src = large;
+    modalImg.alt = title;
+    modal.showModal();
+  });
 
   pictures.appendChild(divArticle);
+});
+
+closeBtn.addEventListener("click", () => {
+  modal.close();
 });
